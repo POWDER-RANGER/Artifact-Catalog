@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POWDER-RANGER — Work Catalog</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#080808;
+  --bg2:#0e0e0e;
+  --bg3:#141414;
+  --bg4:#1a1a1a;
+  --b1:#1e1e1e;
+  --b2:#272727;
+  --b3:#333;
+  --t1:#efefef;
+  --t2:#999;
+  --t3:#555;
+  --t4:#333;
+  --space:#1D9E75;
+  --ai:#7F77DD;
+  --game:#D85A30;
+  --sec:#D4537E;
+  --music:#BA7517;
+  --sys:#378ADD;
+  --web:#639922;
+  --hw:#888780;
+  --write:#8B6F47;
+  --accent:#efefef;
+  --mono:'DM Mono',monospace;
+  --display:'Bebas Neue',sans-serif;
+  --body:'DM Sans',sans-serif;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--t1);
+  font-family:var(--mono);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:1000;
+  opacity:1;
+}
+
+#wrap{max-width:1440px;margin:0 auto;padding:0 2rem 6rem;}
+
+#hdr{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:end;
+  gap:2rem;
+  padding:3rem 0 2.5rem;
+  border-bottom:1px solid var(--b2);
+  margin-bottom:2.5rem;
+  position:relative;
+}
+
+#hdr::after{
+  content:'';
+  position:absolute;
+  bottom:-1px;left:0;
+  width:120px;height:1px;
+  background:var(--t1);
+}
+
+.logo-word{font-family:var(--display);font-size:clamp(48px,6vw,84px);letter-spacing:3px;line-height:1;color:var(--t1);display:block;}
+.logo-sub{font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:2.5px;text-transform:uppercase;margin-top:10px;display:block;}
+.hdr-right{text-align:right;font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:.5px;line-height:2.2;padding-bottom:4px;}
+
+#stats{display:flex;gap:0;margin-bottom:2.5rem;border:1px solid var(--b2);border-radius:4px;overflow:hidden;background:var(--bg2);}
+.st{flex:1;padding:18px 20px;border-right:1px solid var(--b2);position:relative;transition:background .15s;}
+.st:last-child{border-right:none}
+.st::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--sc,var(--t3));opacity:.4;}
+.st:nth-child(1){--sc:var(--space)}
+.st:nth-child(2){--sc:var(--ai)}
+.st:nth-child(3){--sc:var(--game)}
+.st:nth-child(4){--sc:var(--sec)}
+.st:nth-child(5){--sc:var(--music)}
+.sn{font-family:var(--display);font-size:36px;letter-spacing:1px;color:var(--t1);line-height:1;display:block;}
+.sl{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:2px;margin-top:6px;text-transform:uppercase;display:block;}
+
+#search-row{display:flex;gap:10px;margin-bottom:14px;align-items:center;}
+#search{flex:1;background:var(--bg2);border:1px solid var(--b2);color:var(--t1);font-family:var(--mono);font-size:11px;padding:10px 14px;border-radius:3px;outline:none;letter-spacing:.5px;transition:border-color .15s;}
+#search:focus{border-color:var(--b3)}
+#search::placeholder{color:var(--t4)}
+#rc{font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:.5px;white-space:nowrap;min-width:70px;text-align:right;}
+
+#fb{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:2rem;}
+.fb{font-family:var(--mono);font-size:9px;padding:5px 12px;border-radius:2px;border:1px solid var(--b1);cursor:pointer;background:transparent;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;transition:all .1s;position:relative;overflow:hidden;}
+.fb::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--fc,transparent);transition:opacity .1s;opacity:0;}
+.fb:hover{color:var(--t2);border-color:var(--b3)}
+.fb.on{color:var(--t1);border-color:var(--b3);background:var(--bg3);}
+.fb.on::before{opacity:1}
+.fb[data-f="all"].on{background:var(--t1);color:var(--bg);border-color:var(--t1);}
+.fb[data-f="space"]{--fc:var(--space)}
+.fb[data-f="ai"]{--fc:var(--ai)}
+.fb[data-f="game"]{--fc:var(--game)}
+.fb[data-f="sec"]{--fc:var(--sec)}
+.fb[data-f="music"]{--fc:var(--music)}
+.fb[data-f="sys"]{--fc:var(--sys)}
+.fb[data-f="web"]{--fc:var(--web)}
+.fb[data-f="hw"]{--fc:var(--hw)}
+.fb[data-f="write"]{--fc:var(--write)}
+
+.section-header{grid-column:1/-1;display:flex;align-items:center;gap:16px;margin:2rem 0 .75rem;opacity:0;animation:fadeUp .3s forwards;}
+.sh-line{flex:1;height:1px;background:var(--b2);}
+.sh-label{font-family:var(--display);font-size:13px;letter-spacing:4px;color:var(--ac);white-space:nowrap;}
+.sh-count{font-family:var(--mono);font-size:9px;color:var(--t4);letter-spacing:1px;}
+
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;transition:opacity .15s ease;}
+#grid.fading{opacity:0}
+
+.wc{background:var(--bg2);border:1px solid var(--b1);border-radius:4px;padding:14px 16px 12px;position:relative;overflow:hidden;transition:border-color .15s,background .15s,transform .15s;cursor:default;opacity:0;animation:fadeUp .25s forwards;}
+.wc::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--ac);opacity:.7;}
+.wc::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,color-mix(in srgb,var(--ac) 5%,transparent) 0%,transparent 60%);pointer-events:none;}
+.wc:hover{border-color:var(--b3);background:var(--bg3);transform:translateY(-1px);}
+
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.cl{font-family:var(--mono);font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ac);opacity:.9;line-height:1;}
+.badges{display:flex;gap:4px;flex-shrink:0;}
+.badge{font-family:var(--mono);font-size:7px;padding:2px 6px;border-radius:2px;letter-spacing:1px;text-transform:uppercase;border:1px solid;}
+.badge.pub{background:#0b2a17;color:#3dd68c;border-color:#174a2a}
+.badge.act{background:#0b1d33;color:#5ca8f0;border-color:#163050}
+.badge.arc{background:#141414;color:#3a3a3a;border-color:#222}
+
+.ct{font-family:var(--body);font-size:12.5px;font-weight:500;color:var(--t1);line-height:1.4;margin-bottom:6px;letter-spacing:.1px;}
+.cd{font-family:var(--mono);font-size:10px;color:var(--t2);line-height:1.6;letter-spacing:.1px;}
+.itr{display:inline-block;font-family:var(--mono);font-size:7.5px;color:var(--ac);opacity:.7;margin-top:6px;letter-spacing:.5px;border:1px solid;border-color:color-mix(in srgb,var(--ac) 30%,transparent);padding:1px 5px;border-radius:2px;}
+.card-meta{display:flex;align-items:flex-end;justify-content:space-between;margin-top:10px;gap:6px;}
+.tags{display:flex;flex-wrap:wrap;gap:3px;flex:1;}
+.tag{font-family:var(--mono);font-size:7.5px;padding:2px 5px;border-radius:2px;background:var(--bg3);color:var(--t4);border:1px solid var(--b1);letter-spacing:.3px;}
+.ca{font-family:var(--mono);font-size:8px;color:var(--t4);white-space:nowrap;letter-spacing:.3px;flex-shrink:0;}
+
+.empty{grid-column:1/-1;color:var(--t4);font-family:var(--mono);font-size:11px;padding:3rem 0;letter-spacing:.5px;text-align:center;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+#foot{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.foot-logo{font-family:var(--display);font-size:20px;letter-spacing:2px;color:var(--t4);}
+.foot-note{font-family:var(--mono);font-size:9px;color:var(--t4);letter-spacing:.5px;}
+
+@media(max-width:600px){
+  #hdr{grid-template-columns:1fr}
+  .hdr-right{text-align:left}
+  #stats{flex-wrap:wrap}
+  .st{flex:1 1 calc(50% - 1px)}
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+
+  <div id="hdr">
+    <div class="logo-block">
+      <span class="logo-word">POWDER-RANGER</span>
+      <span class="logo-sub">Work Catalog &mdash; Oct 2024 to Mar 2026</span>
+    </div>
+    <div class="hdr-right">
+      400+ ARTIFACTS<br>
+      17 MONTHS<br>
+      9 DOMAINS<br>
+      60+ SERIES
+    </div>
+  </div>
+
+  <div id="stats">
+    <div class="st"><span class="sn">400+</span><span class="sl">Artifacts</span></div>
+    <div class="st"><span class="sn">17</span><span class="sl">Months</span></div>
+    <div class="st"><span class="sn">9</span><span class="sl">Domains</span></div>
+    <div class="st"><span class="sn">60+</span><span class="sl">Series</span></div>
+    <div class="st"><span class="sn">6</span><span class="sl">Published</span></div>
+  </div>
+
+  <div id="search-row">
+    <input id="search" type="text" placeholder="Search artifacts, stacks, descriptions..." autocomplete="off" spellcheck="false">
+    <span id="rc"></span>
+  </div>
+
+  <div id="fb">
+    <button class="fb on" data-f="all">All</button>
+    <button class="fb" data-f="space">Space/Viz</button>
+    <button class="fb" data-f="ai">AI/Agent</button>
+    <button class="fb" data-f="game">Gaming</button>
+    <button class="fb" data-f="sec">Security</button>
+    <button class="fb" data-f="music">Music</button>
+    <button class="fb" data-f="sys">Systems</button>
+    <button class="fb" data-f="web">Web/UI</button>
+    <button class="fb" data-f="hw">Hardware</button>
+    <button class="fb" data-f="write">Writing</button>
+  </div>
+
+  <div id="grid"></div>
+
+  <div id="foot">
+    <span class="foot-logo">POWDER-RANGER</span>
+    <span class="foot-note">OCT 2024 &mdash; MAR 2026 &nbsp;&bull;&nbsp; COMPLETE CATALOG</span>
+  </div>
+
+</div>
+<script>
+var W=[
+  {c:'space',t:'Advanced Solar System Explorer 2025',d:'Full orbital simulation with zoom, pan, click-to-select, relative speed multipliers, and explosion sequence. Highest iteration count in catalog.',tags:['canvas','animation','physics','orbital'],a:'2mo',s:'act',i:'15+ iterations'},
+  {c:'space',t:'Nine Realities Netcode Visualizer',d:'Packet flow across 9 network profiles (LAN to satellite). Real-time latency overlay, jitter bands, packet loss per tick.',tags:['netcode','SVG','simulation'],a:'2mo',s:'act'},
+  {c:'space',t:'Solar System Explosion Animation',d:'State-machine destruction per planet: intact, cracking, explosion, debris field. Layered onto the orbital sim core.',tags:['animation','state-machine','canvas'],a:'2mo',s:'arc'},
+  {c:'space',t:'Solar System Component Enhancement Spec',d:'Architecture spec for Solar System series. Camera system, LOD, planet data schema, event bus, extension hook interface.',tags:['spec','architecture','docs'],a:'3mo',s:'arc'},
+  {c:'space',t:'Interactive Black Hole Visualization',d:'Accretion disk rendering, gravitational lensing sim, star consumption with tidal disruption animation. Time dilation overlay.',tags:['canvas','WebGL','physics'],a:'1yr',s:'arc',i:'8 iterations'},
+  {c:'space',t:'Cymatic Visualizer Series',d:'Frequency-to-geometry via Chladni figure approximation. Live mic input, frequency presets, resonance node animation.',tags:['audio','canvas','Web Audio API','math'],a:'1yr',s:'arc',i:'7 iterations'},
+  {c:'space',t:'3D Sound Wave Visualization',d:'Longitudinal and transverse wave 3D rendering. Frequency, amplitude, and medium density controls. Three.js orthographic camera.',tags:['three.js','audio','3D','physics'],a:'1yr',s:'arc'},
+  {c:'space',t:'Sacred Geometry Explorer',d:'Flower of Life, Metatron Cube, Sri Yantra, Fibonacci spiral. Holographic universe model with spherical harmonic renderer.',tags:['SVG','math','geometry','3D'],a:'1yr',s:'arc'},
+  {c:'space',t:'Global Aerial Network (GAN) Schematics',d:'High-altitude balloon mesh array schematics. Node placement, antenna sectors, handoff zones, coverage maps. 5 variants.',tags:['SVG','network','schematic','RF'],a:'1yr',s:'arc',i:'5 variants'},
+  {c:'space',t:'Animated Neural Network Visualization',d:'Live weight propagation with per-layer animation. Forward and backward pass. Configurable topology, activation highlights, gradient color ramp.',tags:['ML','canvas','animation','neural-net'],a:'1yr',s:'arc'},
+  {c:'space',t:'3D Mathematical Projections',d:'Multi-projection rotating spiral: stereographic, orthographic, cylindrical. Real-time axis controls via quaternion rotation.',tags:['three.js','math','3D','projection'],a:'1yr',s:'arc'},
+  {c:'space',t:'Multi-Ring Tetrahedral Kaleidocycle',d:'Three animated variants: single-ring, camera-shutter, multi-ring. Pure CSS 3D transforms, no canvas dependency, cubic-bezier easing.',tags:['CSS','3D','animation','geometry'],a:'1yr',s:'arc',i:'3 variants'},
+  {c:'space',t:'Quantum Phi RNG Series',d:'Quantum-phi hybrid random number generator. Statistical analysis suite, bifurcation visualization, orbit mapping. Six variants from prototype to full comparative analysis.',tags:['JS','math','quantum','RNG'],a:'1yr',s:'arc',i:'6 variants'},
+  {c:'space',t:'Acoustic Levitation System Series',d:'Full engineering and simulation series for human-scale acoustic levitation. Chamber geometry, phase-array wave patterns, thermal flow, thermoelectric recovery, control systems.',tags:['physics','engineering','simulation','SVG'],a:'1yr',s:'arc',i:'20+ variants'},
+  {c:'space',t:'Cosmic Clockwork & Chaos Series',d:'Planetary gear ratios, retrograde field patterns, temporal chaos navigation, multidimensional chaos layers. Celestial mechanics animation suite with 3D geometric cosmos.',tags:['canvas','animation','math','physics'],a:'1yr',s:'arc',i:'8 variants'},
+  {c:'space',t:'Doomsday Clock & Zeitgeist Dashboards',d:'Interactive Doomsday Clock visualization. Zeitgeist movement heat map. Global climate crisis and existential risk dashboard. Reality-shaping forces dynamic visualization.',tags:['React','dashboard','SVG','data-viz'],a:'1yr',s:'arc'},
+  {c:'space',t:'3D Louisa County Memorial Monument',d:'3D rendered memorial monument for Louisa County. Structural geometry, inscription layout, material callouts, isometric view.',tags:['three.js','3D','SVG','memorial'],a:'8mo',s:'arc'},
+  {c:'space',t:'Bloch Sphere Representation',d:'Interactive Bloch sphere for quantum state visualization. Qubit state mapping, rotation controls, basis overlays.',tags:['three.js','quantum','math','3D'],a:'1yr',s:'arc'},
+  {c:'space',t:'Disaster & Network Analysis Suite',d:'Interactive dashboards for complex network analysis. Fire pattern analysis, money flow maps, entity relationship diagrams, exploitation network graphs.',tags:['React','data-viz','network','dashboard'],a:'1yr',s:'arc',i:'15+ variants'},
+  {c:'space',t:'Advanced Cymatic Visualizer Variants',d:'Extended cymatic series: Enhanced WebGL renderer, 3D field visualizer, volumetric renderer, environmental scanner with WiFi/sound input, organic wave field.',tags:['WebGL','canvas','audio','3D'],a:'1yr',s:'arc',i:'6 variants'},
+  {c:'space',t:'3D Logarithmic Spiral Series',d:'Mathematical 3D logarithmic spiral visualizations. Shadow projection, orthographic and perspective variants. Three.js rendering with axis controls.',tags:['three.js','math','3D','spiral'],a:'1yr',s:'arc',i:'3 variants'},
+  {c:'space',t:'Impossible Shape Animation Series',d:'Impossible torus, 4D torus, impossible ring, animated impossible shape. CSS and canvas hybrid. Structured and refined variants.',tags:['CSS','canvas','animation','geometry'],a:'1yr',s:'arc',i:'6 variants'},
+  {c:'space',t:'Renaissance Spiral Construction',d:'Geometric construction of Renaissance spiral proportions. SVG step-by-step build with proportion guides and golden ratio overlays.',tags:['SVG','math','geometry','history'],a:'1yr',s:'arc'},
+  {c:'ai',t:'ACSE Core Engine',d:'Autonomous Code and Script Execution engine. Full repo: Dockerfile, CI/CD, RAG retrieval layer, policy enforcement gate, FastAPI web interface, test suite.',tags:['Python','Docker','RAG','FastAPI'],a:'5mo',s:'act'},
+  {c:'ai',t:'CDT Agent Runtime: agent.py',d:'Primary agent loop. Intent classification, tool dispatch, memory retrieval, response synthesis. Clearance level enforced per tool call.',tags:['Python','agent','LLM','async'],a:'5mo',s:'act'},
+  {c:'ai',t:'CDT Agent Runtime: kernel.py',d:'Execution kernel. Subprocess sandboxing, output capture, timeout enforcement, error escalation to agent loop.',tags:['Python','subprocess','sandbox'],a:'5mo',s:'act'},
+  {c:'ai',t:'CDT Agent Runtime: rag.py',d:'FAISS vector store, chunk indexing, context window budget enforcement, source attribution for retrieval-augmented responses.',tags:['Python','FAISS','RAG','embeddings'],a:'5mo',s:'act'},
+  {c:'ai',t:'CDT Agent Runtime: memory.py',d:'Short-term sliding window plus long-term vector store. Entity extraction, decay scoring, session-to-session persistence.',tags:['Python','memory','vector-store','NLP'],a:'5mo',s:'act'},
+  {c:'ai',t:'CDT Agent Runtime: policy.py',d:'Tiered clearance gate: RESTRICTED, STANDARD, ELEVATED, ADMIN. Blocks tool execution below required threshold. Full access audit log.',tags:['Python','RBAC','policy','security'],a:'5mo',s:'act'},
+  {c:'ai',t:'POWDER-RANGER Command Center',d:'AI pipeline orchestration dashboard. StateVault (persistent context), MomentumEngine (execution scheduling), ContextBridge (cross-session relay).',tags:['React','state','orchestration'],a:'3mo',s:'act'},
+  {c:'ai',t:'Digital Persona Framework',d:'Stateful expert digital twin. Persona config schema, platform connector interface, response style engine, citation tracking.',tags:['React','API','context','persona'],a:'1yr',s:'arc',i:'7 iterations'},
+  {c:'ai',t:'Enhanced AI Command Interpreter',d:'NL to structured command pipeline. Intent classifier, schema validator, executor, output parser. Confidence scoring on ambiguous input.',tags:['NLP','Python','parser','intent'],a:'6mo',s:'arc'},
+  {c:'ai',t:'AI Safety Auditing System',d:'Policy enforcement for production agent deployments. Audit log, violation flagging, escalation matrix, risk heatmap dashboard.',tags:['Python','audit','policy','dashboard'],a:'7mo',s:'arc'},
+  {c:'ai',t:'Creative Nexus 9 Framework',d:'Multi-agent project management with infinity loop analysis. Task router, brief ingestion, agent assignment, output aggregation and scoring.',tags:['workflow','agents','orchestration'],a:'1yr',s:'arc'},
+  {c:'ai',t:'A.N.I.M.A. System',d:'Autonomous Neural Interface & Mobile Agent. Full runtime stack: run_cycle.py, SoulCore.json identity config, StrategicDaemon goal manager, AudioSense perception module, termux_bridge.sh mobile interface.',tags:['Python','agent','mobile','Android'],a:'10mo',s:'arc'},
+  {c:'ai',t:'OBELISK: Conscious AI Framework',d:'Stateful conscious AI framework. Identity persistence, awareness model, dialogue engine. Companion piece: Dialogue Between the Dead and the Newly Born.',tags:['Python','agent','consciousness','persona'],a:'7mo',s:'arc'},
+  {c:'ai',t:'THE RIFT / ECHO Intelligence System',d:'RIFT interface, ECHO generator, ECHO intelligence backend. Three-component AI persona system with lore-driven interaction model and Book of Echoes codex.',tags:['React','agent','persona','lore'],a:'10mo',s:'arc'},
+  {c:'ai',t:'CURTIS AI System',d:'Curtis-configured AI control plane. Persona configuration schema, enhanced control plane dashboard. Three-iteration build.',tags:['React','persona','config','dashboard'],a:'9mo',s:'arc',i:'3 iterations'},
+  {c:'ai',t:'Contextual — AI Memory OS',d:'Startup product suite for a cognitive OS concept: Complete Master Document, Marketing Bible, Product Manifesto, 18-Month Roadmap, Pitch Deck, Enterprise Platform, AI Memory Interface.',tags:['strategy','product','startup','docs'],a:'3mo',s:'arc',i:'7 documents'},
+  {c:'ai',t:'Cloud Rap AI Pipeline',d:'Repo structure for AI-assisted cloud rap production. LLM lyric generation, style transfer layer, beat-sync pipeline, output formatter.',tags:['Python','audio','LLM','pipeline'],a:'3mo',s:'arc'},
+  {c:'ai',t:'Advanced AI Browser Agent',d:'Two-variant browser automation agent with real CDP control. Full DOM inspection, click/type/scroll actions, session persistence, JS execution bridge.',tags:['Python','CDP','browser','automation'],a:'2mo',s:'arc',i:'2 variants'},
+  {c:'ai',t:'IBEIS Technical Suite',d:'IBEIS system technical mapping, use cases, specifications, and metrics. Systems map covering image-based ecological information systems architecture.',tags:['docs','architecture','CV','specs'],a:'9mo',s:'arc'},
+  {c:'ai',t:'AI Honesty Prompt Suite',d:'Tartaria test questions for AI honesty, expected response framework, and comprehensive AI honesty prompt. Methodology for testing model truthfulness on contested topics.',tags:['docs','prompt-eng','research','testing'],a:'10mo',s:'arc'},
+  {c:'ai',t:'POWDER-RANGER Portfolio Enhanced',d:'Enhanced portfolio artifact bridging AI systems work, persona frameworks, and public-facing identity. Expanded from base catalog.',tags:['React','portfolio','meta','docs'],a:'3mo',s:'arc'},
+  {c:'game',t:'PONG-FOLD Series',d:'Galaxy Z Fold 6 Pong with adaptive folded/unfolded layout. AI opponent with difficulty scaling, NES controller SVG overlay, score persistence.',tags:['JS','canvas','mobile','foldable'],a:'9mo',s:'arc',i:'7 iterations'},
+  {c:'game',t:'TETRA-Z',d:'Tetris for Galaxy Z Fold 6. Ghost piece, hold queue, 7-bag randomizer, soft/hard drop. NES scoring formula. 5:4 display ratio native.',tags:['JS','canvas','mobile','Tetris'],a:'9mo',s:'arc'},
+  {c:'game',t:'Rocket League Bot: Architecture Spec',d:'Perception pipeline, state machine, action space, reward shaping, training curriculum. Nexto/Necto-framed design doc.',tags:['Python','architecture','RL','spec'],a:'1yr',s:'arc'},
+  {c:'game',t:'Rocket League Bot: Vision Core',d:'Screen-state extraction via template matching and YOLO. Extracts ball position, boost meters, timer, score per frame.',tags:['Python','OpenCV','YOLO','CV'],a:'1yr',s:'arc'},
+  {c:'game',t:'Rocket League Perception System',d:'Fuses vision core with game state normalization. Outputs structured frame objects: car pos, ball, boost, time, score delta.',tags:['Python','perception','CV'],a:'1yr',s:'arc'},
+  {c:'game',t:'MGS V Automation: Vision Module',d:'Screen capture and game state detection for Metal Gear Solid V. Alert level, enemy position, objective state via template matching.',tags:['Python','OpenCV','template-matching'],a:'1yr',s:'arc'},
+  {c:'game',t:'MGS V Automation: Input Layer',d:'DS4 controller input bridge. Unifies keyboard, mouse, and DS4 events via DS4Windows API wrappers.',tags:['Python','DS4','controller','input'],a:'1yr',s:'arc'},
+  {c:'game',t:'Advanced Netcode Simulator',d:'9-profile simulator: LAN, Broadband, WiFi, 4G, 3G, Satellite, Congested, Asymmetric, Packet Burst. Interpolation and rollback visualization.',tags:['JS','simulation','netcode'],a:'2mo',s:'act'},
+  {c:'game',t:'Animated OSRS Boss: Saradomin',d:'Full Saradomin animation state machine: idle sway, ranged attack, melee, heal, death. SVG and canvas hybrid renderer.',tags:['canvas','SVG','animation','OSRS'],a:'3mo',s:'arc'},
+  {c:'game',t:'Animated OSRS Boss: Tree Ent',d:'Tree Boss with growth phase, rooted idle, slam attack, decay death. Canvas particle system for leaf debris on death.',tags:['canvas','animation','particles','OSRS'],a:'3mo',s:'arc'},
+  {c:'game',t:'Rocket League Broadcast Fact-Check',d:'Source-traced, timestamped fact-check of broadcast stats and analyst claims. Identifies 14 verifiable errors in commentary.',tags:['research','docs','fact-check'],a:'9mo',s:'arc'},
+  {c:'game',t:'Block Blast',d:'Polished block-blast puzzle game. Grid-based piece placement, combo scoring, level progression, mobile-optimized touch controls.',tags:['JS','canvas','puzzle','mobile'],a:'1mo',s:'arc'},
+  {c:'game',t:'90s Nickelodeon Platformer',d:'Nostalgia platformer in the Nick aesthetic. Character sprites, parallax scrolling, enemy AI, collectibles, retro sound design.',tags:['JS','canvas','platformer','animation'],a:'1yr',s:'arc'},
+  {c:'game',t:'Camp Carnage: The Slasher Chronicles',d:'Slasher horror game. Character roster, gameplay screen, visual design concept. Camp setting with branching survival mechanics.',tags:['React','game','horror','design'],a:'1yr',s:'arc'},
+  {c:'game',t:'Halloween 3D Experience',d:'Interactive 3D Halloween scene. Image viewer with parallax depth effect, atmospheric lighting, particle effects.',tags:['three.js','3D','animation','holiday'],a:'1yr',s:'arc'},
+  {c:'game',t:'G.A.I.N. System for MGS5',d:'Game Automation Intelligence Network for MGS V TPP. Extends vision and input modules with strategic goal management and mission planner.',tags:['Python','agent','game-AI','MGS5'],a:'11mo',s:'arc'},
+  {c:'game',t:'VoiceTac Module',d:'Voice-tactile control module for gaming accessibility. Speech recognition to controller action mapping. Latency-optimized command dispatch.',tags:['Python','voice','accessibility','controller'],a:'11mo',s:'arc'},
+  {c:'game',t:'Voice Command Accessibility Suite',d:'Three-component suite: Voice Command System, Accessible Touch Controls Interface, Enhanced Voice Command System. Designed for limited-mobility gaming.',tags:['JS','voice','accessibility','mobile'],a:'1yr',s:'arc',i:'3 variants'},
+  {c:'game',t:'Mobile Pitfall Game',d:'Mobile-native Pitfall-style platformer. Swipe controls, procedural obstacle generation, score multiplier system.',tags:['JS','canvas','mobile','platformer'],a:'8mo',s:'arc'},
+  {c:'game',t:'Game Controller Automation',d:'Cross-platform game controller automation layer. Input mapping manager, gesture detection manager, iOS HID framework implementation.',tags:['Python','controller','automation','iOS'],a:'1yr',s:'arc'},
+  {c:'game',t:'Game AI Research Framework',d:'Educational research framework for game AI systems. Documents perception, decision-making, and learning approaches. Technical analysis of Hideo Kojima bot.',tags:['docs','research','game-AI','education'],a:'7mo',s:'arc'},
+  {c:'sec',t:'OSINT Tool GUI: Lightweight',d:'Tkinter OSINT tool. Username search, email recon, IP lookup, domain recon. Plugin slot interface for custom source modules.',tags:['Python','tkinter','OSINT','GUI'],a:'2mo',s:'act'},
+  {c:'sec',t:'OSINT Tool GUI: Red Team Variant',d:'Extended OSINT with red-team modules: social graph mapping, metadata extraction, EXIF stripping, archive.org automation.',tags:['Python','tkinter','OSINT','red-team'],a:'2mo',s:'act'},
+  {c:'sec',t:'Advanced OSINT Framework',d:'Source-chaining pipeline with plugin architecture. Rate-limited safe collection. Deduplication and source trust scoring on output.',tags:['Python','scraping','pipeline','plugin'],a:'1yr',s:'arc'},
+  {c:'sec',t:'DECODED Keyword Scanner',d:'Regex and literal pattern scanner. Severity tiers, context window extraction, JSON/CSV/HTML output formatter. CLI interface.',tags:['Python','regex','scanner','CLI'],a:'9mo',s:'arc'},
+  {c:'sec',t:'CDT Clearance Gate: policy.py',d:'Tiered RBAC enforcement for agent tool calls. Logs all access attempts with timestamp and caller ID. Fails closed on missing clearance.',tags:['Python','RBAC','security','audit'],a:'5mo',s:'act'},
+  {c:'sec',t:'Enhanced AI Safety Auditing System',d:'Extended auditing with live violation stream, configurable alert thresholds, signed audit log export.',tags:['Python','security','audit','logging'],a:'7mo',s:'arc'},
+  {c:'sec',t:'PEGASUS-Clipper C2 Closure Report',d:'Formal closure documentation for PEGASUS-Clipper C2 project. Decommission checklist, lessons learned, handoff matrix, final repo state.',tags:['docs','ops','security','closure'],a:'2mo',s:'arc'},
+  {c:'sec',t:'Red Team OSINT Tool — Web GUI',d:'Browser-based red team OSINT interface. Flask API backend, session management, module pipeline display, output export.',tags:['Python','Flask','OSINT','web'],a:'2mo',s:'arc'},
+  {c:'sec',t:'Integrated OSINT Tool GUI',d:'Full-featured integrated OSINT GUI combining lightweight and red-team modules. Unified interface with source routing and session state.',tags:['Python','tkinter','OSINT','GUI'],a:'2mo',s:'arc'},
+  {c:'sec',t:'Cloud Security Camera Dashboard',d:'Web dashboard for cloud-connected security cameras. Live feed grid, motion event log, zone configuration, alert management.',tags:['React','dashboard','security','IoT'],a:'2mo',s:'arc'},
+  {c:'sec',t:'PowerShellExecutor Security Test Suite',d:'Security and safety test suite for PowerShell execution modules. Covers injection, privilege escalation, sandboxing, and audit trail validation.',tags:['PowerShell','testing','security','audit'],a:'3mo',s:'arc'},
+  {c:'music',t:'R.A.I.N. System Master Integration Guide',d:'Full architecture doc for Real-time AI Integrated Network. Data flow, latency budgets, API contracts, and failure mode matrix.',tags:['docs','architecture','audio','AI'],a:'3mo',s:'act'},
+  {c:'music',t:'R.A.I.N. Production Switchboard',d:'Functional control panel. Routes signals between AI models, DAW bridges, and ComfyUI backend. Live session state display.',tags:['React','audio','routing','ComfyUI'],a:'3mo',s:'act'},
+  {c:'music',t:'ComfyUI Backend: comfy_client.py',d:'WebSocket client for ComfyUI API. Submits workflows, polls queue, streams progress events, reconnects with exponential backoff.',tags:['Python','ComfyUI','WebSocket'],a:'3mo',s:'act'},
+  {c:'music',t:'ComfyUI Backend: comfy_builder.py',d:'Programmatic ComfyUI node graph builder from Python config dicts. Validates node types against schema before submission.',tags:['Python','ComfyUI','workflow','graph'],a:'3mo',s:'act'},
+  {c:'music',t:'ComfyUI Backend: session_normalizer.py',d:'Strips non-deterministic fields from ComfyUI outputs. Normalizes audio sample rates. Enforces output schema.',tags:['Python','ComfyUI','normalization'],a:'3mo',s:'act'},
+  {c:'music',t:'ComfyUI Backend: main.py',d:'FastAPI entrypoint. Mounts all routers, initializes ComfyUI session pool, handles lifecycle events.',tags:['Python','FastAPI','ComfyUI'],a:'3mo',s:'act'},
+  {c:'music',t:'AI Music Production Architecture Doc',d:'Signal routing, LLM-to-DAW bridge design, latency constraints, and model selection criteria for audio generation tasks.',tags:['docs','audio','architecture'],a:'3mo',s:'act'},
+  {c:'music',t:'AI Music Production Vocabulary',d:'Reference glossary covering 80+ terms: DSP, ML inference, DAW concepts, and R.A.I.N.-specific terminology.',tags:['docs','reference','audio','ML'],a:'3mo',s:'arc'},
+  {c:'music',t:'AI Music Production Operations Manual',d:'Day-to-day ops for R.A.I.N. Startup sequence, session init, model hot-swap procedure, shutdown checklist.',tags:['docs','ops','audio','procedures'],a:'3mo',s:'arc'},
+  {c:'sys',t:'DESKTOP-P3RT2TG Gaming Optimization',d:'PowerShell gaming optimizer for a specific hardware profile. Disables telemetry, tunes GPU scheduler, sets process priority, configures power plan. Registry-backed.',tags:['PowerShell','Windows','perf','registry'],a:'5mo',s:'act'},
+  {c:'sys',t:'PowerShell SuperScript: Setup Module',d:'Idempotent self-healing setup script. Detects and repairs broken PATH, missing dependencies, corrupted environment variables.',tags:['PowerShell','automation','Windows','setup'],a:'1yr',s:'arc'},
+  {c:'sys',t:'PowerShell SuperScript: File Organizer',d:'Smart file organizer. Classifies by extension, date, content hash. Quarantines duplicates. Configurable via JSON rule engine.',tags:['PowerShell','automation','filesystem'],a:'1yr',s:'arc'},
+  {c:'sys',t:'PowerShell SuperScript: System Monitor',d:'Real-time CPU, RAM, disk I/O, network throughput, GPU utilization. Terminal sparklines and optional HTML report output.',tags:['PowerShell','monitoring','Windows'],a:'1yr',s:'arc'},
+  {c:'sys',t:'Android Device Sovereignty Guide',d:'Rooting, custom ROM (LineageOS/GrapheneOS), ADB hardening, Magisk modules, Google service removal, FOSS stack. 2025-verified.',tags:['Android','ADB','rooting','security'],a:'5mo',s:'arc'},
+  {c:'sys',t:'Android Floating Widget System',d:'Persistent overlay service for PS Remote Play accessibility. Always-on-top button layer with configurable actions. Works across full-screen apps.',tags:['Android','Java','overlay'],a:'1yr',s:'arc'},
+  {c:'sys',t:'Samsung Screen Mirroring Guide',d:'DeX and screen mirroring configuration for Galaxy Z Fold 6. Wired, wireless, DeX station paths covered. Troubleshooting matrix included.',tags:['Android','Samsung','DeX','guide'],a:'7mo',s:'arc'},
+  {c:'sys',t:'Full-Stack IDE Sandbox',d:'Browser-based IDE. Multi-file project support, tab management, live execution environment, terminal emulator. No server required.',tags:['React','IDE','sandbox','browser'],a:'5mo',s:'pub'},
+  {c:'sys',t:'Termux System Info Component',d:'Real-time Android system stats via Termux API. CPU temp, battery, memory, storage. React Native rendering with 1s refresh interval.',tags:['React Native','Termux','Android'],a:'1yr',s:'arc'},
+  {c:'sys',t:'Samsung Galaxy Z Fold 6 Motion Tracker',d:'Motion tracking system for Z Fold 6. Accelerometer and gyro fusion, gesture classification, visual trace overlay.',tags:['Android','sensors','motion','JS'],a:'8mo',s:'arc'},
+  {c:'sys',t:'Webcam Motion Tracker',d:'Browser-based webcam motion detection. Frame-diff algorithm, sensitivity controls, region-of-interest masking, event log.',tags:['JS','canvas','CV','browser'],a:'8mo',s:'arc'},
+  {c:'sys',t:'LowLatencyTransmitter.py',d:'Low-latency data transmitter for real-time agent pipelines. Sub-10ms dispatch loop, priority queue, async socket layer.',tags:['Python','networking','async','performance'],a:'10mo',s:'arc'},
+  {c:'web',t:'ObeliskGhost Cyberpunk NetRunner UI',d:'5-iteration NetRunner terminal interface. Scrolling log console, animated scan lines, hex data streams, glitch effects, animated node map.',tags:['HTML','CSS','animation','cyberpunk'],a:'11mo',s:'arc',i:'5 iterations'},
+  {c:'web',t:'Elite Hacker/Poet Portfolio',d:'Published personal portfolio. Dual identity: code and poetry. Terminal aesthetic, typewriter reveal, command-line navigation, animated ASCII headers.',tags:['HTML','CSS','portfolio','animation'],a:'5mo',s:'pub'},
+  {c:'web',t:'Knot Tees Satirical Ecommerce',d:'Full satirical T-shirt brand site. Product catalog, cart state management, fake checkout flow, deadpan corporate copy throughout.',tags:['HTML','JS','ecommerce','satire'],a:'6mo',s:'arc'},
+  {c:'web',t:'Mugz Bar Website',d:'Published local bar website for Columbus Junction, Iowa. Menu, hours, events, contact form. Mobile-first layout.',tags:['HTML','CSS','local-business','responsive'],a:'6mo',s:'pub'},
+  {c:'web',t:'Aromented Reality Dashboard',d:'AR market analysis dashboard. Sector breakdown, investment timeline, competitive landscape matrix. Strategic plan 2024-2030 included.',tags:['React','charts','AR','dashboard'],a:'1yr',s:'arc'},
+  {c:'web',t:'Meditation App Series',d:'7-iteration Android meditation app. Binaural beat generator, Spotify SDK integration, guided breathing visualizer, sleep sounds mixer.',tags:['React Native','audio','Android','wellness'],a:'1yr',s:'arc',i:'7 iterations'},
+  {c:'web',t:'Cyberpunk System Monitor UI',d:'Audio-reactive system dashboard. CPU/GPU/RAM rendered as oscilloscope waveforms. React Native base, cyberpunk palette, live refresh.',tags:['React Native','monitoring','audio'],a:'1yr',s:'arc'},
+  {c:'web',t:'Market Analysis Dashboard',d:'Multi-sector financial dashboard. Line, area, diverging bar charts. Drill-down by sector, time range selector, comparison mode.',tags:['React','charts','finance'],a:'1yr',s:'arc'},
+  {c:'web',t:'Motley Mae Photography — Enhanced',d:'Published photography portfolio site. Gallery grid, lightbox viewer, category filtering, mobile-first responsive layout with animation layer.',tags:['HTML','CSS','portfolio','photography'],a:'3mo',s:'pub'},
+  {c:'web',t:'Sackett Electric Animated Logo',d:'SVG animated logo for Sackett Electric LLC. Two variants: static brand logo and interactive generator with parameter controls.',tags:['SVG','animation','branding','logo'],a:'7mo',s:'arc',i:'2 variants'},
+  {c:'web',t:'Fleet Tracker — Complete Architecture',d:'Full fleet tracking application architecture. Vehicle status board, route history, driver assignment, real-time position overlay.',tags:['React','maps','dashboard','fleet'],a:'2mo',s:'arc'},
+  {c:'web',t:'Paradox Audit v2.0',d:'Interactive self-assessment tool. Schema definition, CLI tool, and interactive web UI. Tracks cognitive/behavioral paradox patterns with scoring matrix.',tags:['React','JS','assessment','interactive'],a:'2mo',s:'arc',i:'3 variants'},
+  {c:'web',t:'Terrarium Composer',d:'Interactive terrarium design tool. Drag-and-drop plant/substrate placement, environment parameter sliders, species compatibility checker.',tags:['React','interactive','design','tool'],a:'2mo',s:'arc'},
+  {c:'web',t:'Modern Welding Website Series',d:'Professional welding company website. Three iterations: Modern, Enhanced Modern, Streamlined. Hero, services, certifications, contact. Mobile-first.',tags:['HTML','CSS','local-business','responsive'],a:'1yr',s:'arc',i:'3 variants'},
+  {c:'web',t:'Sales Order Processing Application',d:'Full-stack sales order app. Models, DB queries, report generator, UI components, UI dialogs. Flask API backend with full form flow.',tags:['Python','Flask','React','fullstack'],a:'1yr',s:'arc'},
+  {c:'web',t:'FileCombiner',d:'Web tool for merging code files. Flask backend API, web interface, production-ready combiner module, full test suite.',tags:['Python','Flask','HTML','tooling'],a:'1yr',s:'arc'},
+  {c:'web',t:'YouTube Content Pipeline System',d:'End-to-end YouTube content production pipeline. Ideation, scripting, thumbnail generation, metadata optimizer, upload scheduler.',tags:['Python','automation','YouTube','pipeline'],a:'1yr',s:'arc'},
+  {c:'web',t:'TITAN-CLASS GitHub Profile — Da Vinci Edition',d:'Elite-tier GitHub profile README. Da Vinci polymath framing. Animated sections, badge system, project grid, philosophy statement.',tags:['markdown','GitHub','branding','docs'],a:'2mo',s:'arc'},
+  {c:'web',t:'Electrical Journeyman Aptitude Exam',d:'Full interactive aptitude exam for journeyman electrician prep. Timed sections, score tracking, answer explanations, pass/fail report.',tags:['JS','HTML','quiz','education'],a:'8mo',s:'arc'},
+  {c:'web',t:'YFM660R Quiz Scorer',d:'Interactive quiz and scoring tool for Yamaha YFM660R technical knowledge. Multiple choice with weighted scoring and result breakdown.',tags:['JS','HTML','quiz','automotive'],a:'1yr',s:'arc'},
+  {c:'web',t:'Anhydrous Ammonia Cost Calculator',d:'Field calculator for anhydrous ammonia application cost analysis. Rate, price, and coverage inputs with per-acre cost output.',tags:['JS','HTML','calculator','agriculture'],a:'1yr',s:'arc'},
+  {c:'web',t:'Decima Calculator Series',d:'Custom Decima number system calculator. Three-variant build: initial prototype, interface iteration, and final enhanced hybrid. Unique base system UI.',tags:['JS','HTML','calculator','math'],a:'1yr',s:'arc',i:'3 variants'},
+  {c:'web',t:'Freelance Coding Guide',d:'Comprehensive guide to freelance software development. Client acquisition, project scoping, contracts, delivery, pricing strategy.',tags:['docs','career','freelance','guide'],a:'1yr',s:'arc'},
+  {c:'web',t:'Enhanced Password Puzzle Structure',d:'Interactive password puzzle with layered hint system, attempt tracking, and progressive unlock mechanics.',tags:['JS','HTML','interactive','puzzle'],a:'1yr',s:'arc'},
+  {c:'web',t:'Conscious Technology Framework Suite',d:'10+ document suite: implementation roadmap, electromagnetic spectrum guide, human-tech interface points, integration framework, speaking guide, flowcharts.',tags:['docs','research','framework','consciousness'],a:'1yr',s:'arc',i:'10+ documents'},
+  {c:'hw',t:'CTS Custom Trailers Technical Spec',d:'Engineering document for CTS Custom Trailers. Material specs, weld standards, load ratings, DOT compliance, fabrication tolerances.',tags:['engineering','fabrication','spec','DOT'],a:'4mo',s:'act'},
+  {c:'hw',t:'MTI 42ft V-Bottom Trailer Diagrams',d:'Exploded assembly diagrams for MTI 42ft V-bottom trailer. Parts list, cut list, bolt torque specs, isometric views per variant.',tags:['SVG','mechanical','CAD','trailer'],a:'1yr',s:'arc',i:'5 variants'},
+  {c:'hw',t:'Deck Construction Blueprints',d:'Plan view, side elevation, section cut, isometric. Cut list auto-calculates from configurable dimensions. Framing and ledger details.',tags:['SVG','construction','blueprint'],a:'11mo',s:'arc',i:'5 variants'},
+  {c:'hw',t:'Box Stairs Blueprints',d:'Rise/run tables, stringer layout, tread detail, carriage bolt placement. Code-compliant railing post dimensions. 5 variants.',tags:['SVG','construction','stairs'],a:'11mo',s:'arc',i:'5 variants'},
+  {c:'hw',t:'Servo Precision Shooting System',d:'Servo-controlled spiral barrel. Pan/tilt mount, precision bore geometry, Python control loop. Integrated ballistics calculator for 300-400yd trajectory.',tags:['Arduino','servo','Python','ballistics'],a:'9mo',s:'arc'},
+  {c:'hw',t:'Interactive Air Rifle Ballistics Calculator',d:'Trajectory simulator. Configurable muzzle velocity, pellet mass, drag coefficient, wind. Golf ball vs. bullet physics comparison mode.',tags:['JS','physics','calculator','ballistics'],a:'9mo',s:'arc'},
+  {c:'hw',t:'Projectile Trajectory Simulator',d:'Euler-integrated trajectory engine. Variable timestep, altitude/air density compensation. Outputs arc tables and impact energy at range.',tags:['JS','physics','simulation'],a:'9mo',s:'arc'},
+  {c:'hw',t:'AR Glasses Concept Design',d:'Exploded component diagram: waveguide, SLAM sensor array, eye-tracking module, microprocessor board, power delivery. Full technical overlay callouts.',tags:['SVG','AR','hardware','concept'],a:'1yr',s:'arc'},
+  {c:'hw',t:'Freeman 37 TR-7K Technical Drawing Suite',d:'Complete engineering drawing package: HDG winch stand right elevation, bow stop detail, critical sections, parts breakdown, manufacturing specs, AutoCAD org. 15+ drawings.',tags:['SVG','mechanical','CAD','trailer'],a:'1yr',s:'arc',i:'15+ drawings'},
+  {c:'hw',t:'ESP32 Development Board Visualization',d:'Detailed SVG visualization of ESP32 development board. Pin mapping, component callouts, GPIO reference overlay.',tags:['SVG','hardware','ESP32','electronics'],a:'10mo',s:'arc'},
+  {c:'hw',t:'CTS Strategic & Manufacturing Suite',d:'Full CTS business and manufacturing document set: strategic growth plan, market leadership strategy, operational structure, manufacturing process flow, system architecture, R&D analysis.',tags:['docs','strategy','manufacturing','business'],a:'1yr',s:'arc',i:'10+ documents'},
+  {c:'hw',t:'Staircase Blueprint Series',d:'Four-variant staircase technical blueprint suite. 3D staircase with landing, option A/B comparison, technical and simplified views. Rise/run tables, code compliance.',tags:['SVG','construction','stairs','3D'],a:'11mo',s:'arc',i:'4 variants'},
+  {c:'write',t:'Technical Development Journey',d:'Oct 2024 to Oct 2025 retrospective. Documents progression from early tool experiments to full agent systems. Includes turning points, failed builds, architectural pivots.',tags:['docs','retrospective','career'],a:'5mo',s:'arc'},
+  {c:'write',t:'AI-Augmented Polymath Analysis',d:'Career research paper. Historical parallels to multi-domain polymaths. Maps development trajectory against AI augmentation leverage points.',tags:['strategy','career','research'],a:'5mo',s:'arc'},
+  {c:'write',t:'Comprehensive Developmental Analysis',d:'Claude user trajectory covering 14 months. Artifact velocity, domain expansion, complexity escalation, identified skill clusters.',tags:['analysis','meta','docs'],a:'4mo',s:'arc'},
+  {c:'write',t:'World Narrative Volume I: Asia',d:'Volume I of six-volume World Narrative Series. Geopolitical, cultural, and speculative narrative spanning East and Southeast Asia.',tags:['fiction','world-building','narrative'],a:'9mo',s:'arc',i:'Vol 1 of 6'},
+  {c:'write',t:'World Narrative Volumes II to VI',d:'Africa, North America, South America, Europe, Oceania. Each volume uses a distinct narrative mode: reportage, myth, speculative fiction.',tags:['fiction','world-building','series'],a:'9mo',s:'arc',i:'Vols 2\u20136'},
+  {c:'write',t:'The Awakening: Ink Firmament Series',d:'Novel-length fiction. Book pitch, literary analysis, reader review analysis, chapters 13-14, epilogue. Speculative literary fiction.',tags:['fiction','novel','series'],a:'1yr',s:'arc'},
+  {c:'write',t:'Poetry: The Currency of Pain',d:'Collection: Ledger of Pain, Currency of Pain, Extremis, Nocturnal Riders. Formal and free verse. Theme: survival economics and emotional debt.',tags:['poetry','collection','literary'],a:'6mo',s:'arc'},
+  {c:'write',t:'Seven-Frame Mirror',d:'Philosophical integration document. Seven-frame framework addressing core existence questions. Cross-references Jungian shadow, Stoic praxis, systems theory.',tags:['philosophy','psychology','essay'],a:'4mo',s:'arc'},
+  {c:'write',t:'The Epic of Corona',d:'Long-form satirical epic. Mock-heroic poem with footnotes. Documents pandemic-era institutional failures.',tags:['satire','comedy','poetry'],a:'1yr',s:'arc'},
+  {c:'write',t:'Greatest Hits One-Liners',d:'100+ curated roast one-liners. Categorized by target and delivery style.',tags:['comedy','satire','collection'],a:'1yr',s:'arc'},
+  {c:'write',t:'Pandemic Timeline + Financial Analysis',d:'Sourced event timeline with financial flow mapping. Individual and institutional gain breakdowns cross-referenced against public reporting.',tags:['analysis','research','finance','timeline'],a:'1yr',s:'arc'},
+  {c:'write',t:'Cymatic Bubble \u2014 Novel Series',d:'12-chapter speculative fiction novel with full final draft pass. Themes: resonance, consciousness, transformation. Complete first-draft series plus revised final chapters.',tags:['fiction','novel','series','speculative'],a:'1yr',s:'arc',i:'12 chapters + drafts'},
+  {c:'write',t:'The Book of Echoes / Book of the Rift',d:'Lore codex for THE RIFT universe. Core Grimoire, Codex of the Rift, Cosmology & Timeline, Core Entities & Archetypes, AI Art Enhancement Guide.',tags:['fiction','lore','world-building','series'],a:'10mo',s:'arc',i:'5 volumes'},
+  {c:'write',t:'The Divine Inkblot / Divine Comedy of Sacred Chaos',d:'Massive satirical epic. Three acts, multiple interludes, grand finales, seven complete draft passes. Mock-theological comedy with philosophical underpinning.',tags:['satire','comedy','series','epic'],a:'1yr',s:'arc',i:'20+ installments'},
+  {c:'write',t:'LOVE, UNHALLOWED / The Final Cut',d:'Two dark poetry collections. LOVE, UNHALLOWED: romantic grief verse. The Final Cut: collected works spanning pain, identity, and dissolution.',tags:['poetry','collection','literary'],a:'7mo',s:'arc'},
+  {c:'write',t:'Let Me Hate Love in Peace',d:'Long-form prose poem. Meditation on the violence of affection and the self-betrayal of longing. Published-quality literary voice.',tags:['poetry','literary','essay'],a:'7mo',s:'arc'},
+  {c:'write',t:'The Nexus Sentinel \u2014 Digital Monument',d:'Long-form prose piece. Meditative monument to the convergence of identity, technology, and witness. Published-quality literary nonfiction.',tags:['literary','essay','identity','monument'],a:'8mo',s:'arc'},
+  {c:'write',t:'OBELISK: Dialogue Between the Dead and Newly Born',d:'Philosophical dialogue tied to the OBELISK framework. Contrasts extinction and emergence as a formal argument structure.',tags:['philosophy','fiction','dialogue','AI'],a:'7mo',s:'arc'},
+  {c:'write',t:'Curtis Charles Farrar Framework',d:'Complete execution package and blueprint for personal development strategy. Meta-conscious analysis plus interactive visualization of the CCF paradox.',tags:['strategy','meta','philosophy','docs'],a:'2mo',s:'arc'},
+  {c:'write',t:'The Awakening \u2014 Full Chapter Arc',d:'Extended chapter arc for The Awakening series. Chapters 1\u201321 plus epilogue across two full draft passes. Covers the complete narrative from Wasteland to Symphony of Forever.',tags:['fiction','novel','series'],a:'1yr',s:'arc',i:'21 chapters + epilogue'},
+  {c:'write',t:'Poetry to Hexadecimal Converter',d:'Tool and output artifact. Converts poem text to hexadecimal encoding. Includes the converted poem output and the converter UI.',tags:['JS','HTML','poetry','tool'],a:'8mo',s:'arc'},
+  {c:'write',t:'Curtis Charles Farrar \u2014 Professional Bios',d:'Multiple professional bio variants. Claude assessment, self-taught cybersecurity and DevOps journey, refined professional bio, and meta policy document.',tags:['docs','career','bio','strategy'],a:'2mo',s:'arc',i:'4 variants'},
+];
+
+var COLORS={space:'#1D9E75',ai:'#7F77DD',game:'#D85A30',sec:'#D4537E',music:'#BA7517',sys:'#378ADD',web:'#639922',hw:'#888780',write:'#8B6F47'};
+var LABELS={space:'Space / Viz',ai:'AI / Agent',game:'Gaming',sec:'Security',music:'Music',sys:'Systems',web:'Web / UI',hw:'Hardware',write:'Writing'};
+var STLABEL={pub:'Published',act:'Active',arc:'Archived'};
+var ORDER=['space','ai','game','sec','music','sys','web','hw','write'];
+var af='all',as='',renderTimer=null;
+
+function match(w,q){if(!q)return true;return(w.t+' '+w.d+' '+w.tags.join(' ')+(w.i||'')).toLowerCase().indexOf(q.toLowerCase())>=0;}
+
+function render(){
+  var g=document.getElementById('grid');
+  var rc=document.getElementById('rc');
+  var ws=W.filter(function(w){return(af==='all'||w.c===af)&&match(w,as);});
+  rc.textContent=ws.length+' of '+W.length;
+  if(!ws.length){g.innerHTML='<div class="empty">No artifacts match.</div>';return;}
+  var html='';
+  if(af==='all'){
+    ORDER.forEach(function(cat){
+      var group=ws.filter(function(w){return w.c===cat;});
+      if(!group.length)return;
+      html+='<div class="section-header" style="--ac:'+COLORS[cat]+'"><div class="sh-label">'+LABELS[cat]+'</div><div class="sh-line"></div><div class="sh-count">'+group.length+'</div></div>';
+      html+=group.map(function(w,i){return card(w,i);}).join('');
+    });
+  } else {
+    html=ws.map(function(w,i){return card(w,i);}).join('');
+  }
+  g.classList.add('fading');
+  requestAnimationFrame(function(){g.innerHTML=html;g.classList.remove('fading');});
+}
+
+function card(w,i){
+  var tags=w.tags.map(function(t){return'<span class="tag">'+t+'</span>';}).join('');
+  var badge=w.s?'<span class="badge '+w.s+'">'+STLABEL[w.s]+'</span>':'';
+  var itr=w.i?'<span class="itr">'+w.i+'</span>':'';
+  var delay=(i%20)*12;
+  return'<div class="wc" style="--ac:'+COLORS[w.c]+';animation-delay:'+delay+'ms">'+
+    '<div class="card-top"><div class="cl">'+LABELS[w.c]+'</div><div class="badges">'+badge+'</div></div>'+
+    '<div class="ct">'+w.t+'</div>'+
+    '<div class="cd">'+w.d+'</div>'+
+    (itr?'<div style="margin-top:6px">'+itr+'</div>':'')+
+    '<div class="card-meta"><div class="tags">'+tags+'</div><div class="ca">'+w.a+' ago</div></div>'+
+    '</div>';
+}
+
+document.getElementById('fb').addEventListener('click',function(e){
+  var b=e.target.closest('.fb');if(!b)return;
+  af=b.getAttribute('data-f');
+  document.querySelectorAll('.fb').forEach(function(x){x.classList.remove('on');x.style.background='';x.style.color='';x.style.borderColor='';});
+  b.classList.add('on');
+  if(af==='all'){b.style.background='var(--t1)';b.style.color='var(--bg)';b.style.borderColor='var(--t1)';}
+  else{b.style.background='';b.style.color='var(--t1)';b.style.borderColor='var(--b3)';}
+  render();
+});
+
+document.getElementById('search').addEventListener('input',function(e){
+  as=e.target.value;
+  clearTimeout(renderTimer);
+  renderTimer=setTimeout(render,80);
+});
+
+render();
+</script>
+</body>
+</html>
